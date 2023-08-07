@@ -1,5 +1,5 @@
 let tabuleiro=['a','b','c','d','e','f','g','h','i'];
-
+let roundcounter=0;
 const player = (name, marker) => {
   return{name,marker}
 };
@@ -25,6 +25,10 @@ function iswinner(){
       let aux=document.getElementById('modal');
       aux.innerText=`WINNER : ${actualPlayer.name}`;
       aux.style.cssText="display:flex"
+    }else if(roundcounter==8){
+      let aux=document.getElementById('modal');
+      aux.innerText=`IT'S A TIE!`;
+      aux.style.cssText="display:flex"
     }
 }
 
@@ -34,6 +38,7 @@ function playround(e){
     tabuleiro[e.target.id]=`${actualPlayer.marker}`
     iswinner();
     passavez();
+    roundcounter++;
   }
  
   
@@ -58,10 +63,13 @@ function hidemodal(){
   for (let box of boxes){
     box.innerText="";
   }
-    
+    roundcounter=0;
 }
-playerOne= player("Dego Estiloso","X");
+playerOne= player("Diego Souza","X");
 playerTwo= player("Computer","O");
 var actualPlayer=playerOne;
 document.getElementsByClassName('container')[0].addEventListener('dblclick',hidemodal)
+
+
+
 
